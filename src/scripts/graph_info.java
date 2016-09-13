@@ -19,8 +19,22 @@ public class graph_info extends Script {
 		RSNPC[] npcs = NPCs.find(4364);
 		int i = 0;
 		int totalCycles = 0;
+		FileWriter fw = null;
 		
-		Writer writer = null;
+		try {
+			File file = new File("C:/Users/hsxu/AppData/Roaming/.tribot/text.txt");
+			file.getParentFile().mkdirs();
+			
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				System.out.println(file.getAbsoluteFile());
+				file.createNewFile();
+			}
+			fw = new FileWriter(file.getAbsoluteFile());
+
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		while (true) {
 			for (RSNPC npc : npcs) {
@@ -41,6 +55,19 @@ public class graph_info extends Script {
 				RSTile tile = npc.getPosition();
 				currCoordList.add(tile.getX() + "," + tile.getY());		
 				System.out.println(tile.getX() + "," + tile.getY());
+				
+				try {
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(tile.getX() + "," + tile.getY());
+					bw.newLine();
+					
+					bw.flush();
+
+					System.out.println("Done");
+
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
 
 				coords.remove("NPC" + i);
 				coords.put("NPC" + i, currCoordList);
