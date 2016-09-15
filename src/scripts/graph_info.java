@@ -16,6 +16,7 @@ public class graph_info extends Script {
 
 	@Override
 	public void run() {
+		final int NPC = 4364;
 		RSNPC[] npcs = NPCs.find(4364);
 		int i = 0;
 		int totalCycles = 0;
