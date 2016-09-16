@@ -17,7 +17,7 @@ public class graph_info extends Script {
 	@Override
 	public void run() {
 		final int NPC = 4364;
-		RSNPC[] npcs = NPCs.find(4364);
+		RSNPC[] npcs = NPCs.find(NPC);
 		int i = 0;
 		int totalCycles = 0;
 		FileWriter fw = null;
@@ -37,15 +37,16 @@ public class graph_info extends Script {
 			System.out.println(e.getMessage());
 		}
 		
+		String npcId = "NPC" + i;
 		while (true) {
 			for (RSNPC npc : npcs) {
-				if (!coords.containsKey("NPC" + i)) {
-					coords.put("NPC" + i, new ArrayList<String>());
+				if (!coords.containsKey(npcId)) {
+					coords.put(npcId, new ArrayList<String>());
 				}
 				
 				int[] xVals = npc.getWalkingQueueX();
 				int[] yVals = npc.getWalkingQueueY();
-				ArrayList<String> currCoordList = coords.get("NPC" + i);
+				ArrayList<String> currCoordList = coords.get(npcId);
 				String currLastCoord = "";
 				boolean threshold = false;
 				
